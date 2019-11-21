@@ -13,7 +13,7 @@
  * limitations under the License.
  */
 
-package com.mobiperf;
+package com.example.speedtest;
 
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -24,7 +24,7 @@ import android.preference.PreferenceActivity;
 import android.preference.PreferenceManager;
 import android.widget.Toast;
 
-import com.mobiperf.R;
+import com.example.speedtest.R;
 
 /**
  * Activity that handles user preferences

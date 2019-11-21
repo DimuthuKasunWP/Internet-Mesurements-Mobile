@@ -12,7 +12,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.mobiperf;
+package com.example.speedtest;
 
 import java.security.Security;
 
@@ -42,7 +42,7 @@ import android.widget.TabHost;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.mobiperf.MeasurementScheduler.SchedulerBinder;
+import com.example.speedtest.MeasurementScheduler.SchedulerBinder;
 
 /**
  * The main UI thread that manages different tabs

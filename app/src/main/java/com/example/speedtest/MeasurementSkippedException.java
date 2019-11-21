@@ -12,7 +12,7 @@
  * the License.
  */
 
-package com.mobiperf;
+package com.example.speedtest;
 
 /**
  * Subclass of MeasurementError that indicates that a measurement was skipped - a non-error result.

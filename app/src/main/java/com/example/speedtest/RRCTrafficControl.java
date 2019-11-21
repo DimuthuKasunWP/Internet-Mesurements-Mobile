@@ -12,7 +12,7 @@
  * the License.
  */
 
-package com.mobiperf;
+package com.example.speedtest;
 
 import java.util.concurrent.locks.ReentrantLock;
 

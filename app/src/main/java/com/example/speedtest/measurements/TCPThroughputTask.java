@@ -1,6 +1,6 @@
 // Copyright 2012 RobustNet Lab, University of Michigan. All Rights Reserved.
 
-package com.mobiperf.measurements;
+package com.example.speedtest.measurements;
 
 import java.io.IOException;
 import java.io.InvalidClassException;
@@ -15,12 +15,12 @@ import java.util.Date;
 import java.util.Map;
 import java.util.Random;
 
-import com.mobiperf.Config;
-import com.mobiperf.Logger;
-import com.mobiperf.MeasurementDesc;
-import com.mobiperf.MeasurementError;
-import com.mobiperf.MeasurementResult;
-import com.mobiperf.MeasurementTask;
+import com.example.speedtest.Config;
+import com.example.speedtest.Logger;
+import com.example.speedtest.MeasurementDesc;
+import com.example.speedtest.MeasurementError;
+import com.example.speedtest.MeasurementResult;
+import com.example.speedtest.MeasurementTask;
 import com.mobiperf.util.MLabNS;
 import com.mobiperf.util.MeasurementJsonConvertor;
 import com.mobiperf.util.PhoneUtils;

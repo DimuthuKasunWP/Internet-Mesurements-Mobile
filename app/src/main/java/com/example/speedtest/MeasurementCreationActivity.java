@@ -11,7 +11,7 @@
  * or implied. See the License for the specific language governing permissions and limitations under
  * the License.
  */
-package com.mobiperf;
+package com.example.speedtest;
 
 import android.app.Activity;
 import android.content.Context;
@@ -47,7 +47,7 @@ import com.mobiperf.measurements.TCPThroughputTask.TCPThroughputDesc;
 import com.mobiperf.measurements.RRCTask;
 import com.mobiperf.measurements.RRCTask.RRCDesc;
 import com.mobiperf.util.MLabNS;
-import com.mobiperf.R;
+import com.example.speedtest.R;
 
 import java.io.IOException;
 import java.security.InvalidParameterException;

@@ -13,7 +13,7 @@
  * limitations under the License.
  */
 
-package com.mobiperf.measurements;
+package com.example.speedtest.measurements;
 
 import android.content.Context;
 import android.util.Log;
@@ -44,14 +44,14 @@ import java.util.Map;
 import com.mobiperf.util.MeasurementJsonConvertor;
 import com.mobiperf.util.PhoneUtils;
 import com.mobiperf.util.Util;
-import com.mobiperf.Config;
-import com.mobiperf.Logger;
-import com.mobiperf.MeasurementDesc;
-import com.mobiperf.MeasurementError;
-import com.mobiperf.MeasurementResult;
-import com.mobiperf.MeasurementTask;
-import com.mobiperf.R;
-import com.mobiperf.SpeedometerApp;
+import com.example.speedtest.Config;
+import com.example.speedtest.Logger;
+import com.example.speedtest.MeasurementDesc;
+import com.example.speedtest.MeasurementError;
+import com.example.speedtest.MeasurementResult;
+import com.example.speedtest.MeasurementTask;
+import com.example.speedtest.R;
+import com.example.speedtest.SpeedometerApp;
 
 /**
  * A callable that executes a ping task using one of three methods

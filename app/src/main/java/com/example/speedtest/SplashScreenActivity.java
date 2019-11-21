@@ -13,7 +13,7 @@
  * limitations under the License.
  */
 
-package com.mobiperf;
+package com.example.speedtest;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -24,7 +24,7 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.widget.TextView;
 
-import com.mobiperf.R;
+import com.example.speedtest.R;
 
 /**
  * The splash screen for Speedometer

@@ -12,7 +12,7 @@
  * the License.
  */
 
-package com.mobiperf;
+package com.example.speedtest;
 
 import android.app.AlarmManager;
 import android.app.Notification;
@@ -69,7 +69,7 @@ import com.mobiperf.ResourceCapManager.DataUsageProfile;
 import com.mobiperf.ResourceCapManager.PowerAwareTask;
 import com.mobiperf.util.MeasurementJsonConvertor;
 import com.mobiperf.util.PhoneUtils;
-import com.mobiperf.R;
+import com.example.speedtest.R;
 
 /**
  * The single scheduler thread that monitors the task queue, runs tasks at their specified times,

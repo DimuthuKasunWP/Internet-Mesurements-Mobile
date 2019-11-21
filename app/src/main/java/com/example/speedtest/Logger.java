@@ -1,6 +1,6 @@
 // Copyright 2011 Google Inc. All Rights Reserved.
 
-package com.mobiperf;
+package com.example.speedtest;
 
 import android.util.Log;
 

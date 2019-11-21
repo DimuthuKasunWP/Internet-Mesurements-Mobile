@@ -12,14 +12,14 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.mobiperf.measurements;
+package com.example.speedtest.measurements;
 
-import com.mobiperf.Config;
-import com.mobiperf.Logger;
-import com.mobiperf.MeasurementDesc;
-import com.mobiperf.MeasurementError;
-import com.mobiperf.MeasurementResult;
-import com.mobiperf.MeasurementTask;
+import com.example.speedtest.Config;
+import com.example.speedtest.Logger;
+import com.example.speedtest.MeasurementDesc;
+import com.example.speedtest.MeasurementError;
+import com.example.speedtest.MeasurementResult;
+import com.example.speedtest.MeasurementTask;
 import com.mobiperf.util.MeasurementJsonConvertor;
 import com.mobiperf.util.PhoneUtils;
 

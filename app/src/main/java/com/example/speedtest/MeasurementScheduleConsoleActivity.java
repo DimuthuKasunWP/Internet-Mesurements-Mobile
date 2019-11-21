@@ -13,7 +13,7 @@
  * limitations under the License.
  */
 
-package com.mobiperf;
+package com.example.speedtest;
 
 import android.app.Activity;
 import android.content.BroadcastReceiver;
@@ -39,7 +39,7 @@ import java.util.AbstractCollection;
 import java.util.Date;
 import java.util.HashMap;
 
-import com.mobiperf.R;
+import com.example.speedtest.R;
 
 /**
  * Activity that shows the current measurement schedule of the scheduler

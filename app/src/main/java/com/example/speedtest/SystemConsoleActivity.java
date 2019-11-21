@@ -12,7 +12,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.mobiperf;
+package com.example.speedtest;
 
 import android.app.Activity;
 import android.content.ComponentName;
@@ -24,8 +24,8 @@ import android.os.IBinder;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
-import com.mobiperf.R;
-import com.mobiperf.MeasurementScheduler.SchedulerBinder;
+import com.example.speedtest.R;
+import com.example.speedtest.MeasurementScheduler.SchedulerBinder;
 
 /**
  * The activity that provides a console and progress bar of the ongoing measurement
