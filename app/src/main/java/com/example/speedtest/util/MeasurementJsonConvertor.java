@@ -13,7 +13,7 @@
  * limitations under the License.
  */
 
-package com.mobiperf.util;
+package com.example.speedtest.util;
 
 import com.google.myjson.FieldNamingPolicy;
 import com.google.myjson.Gson;

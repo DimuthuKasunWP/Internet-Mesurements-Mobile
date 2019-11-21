@@ -12,12 +12,12 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.mobiperf.util;
+package com.example.speedtest.util;
 
-import com.mobiperf.DeviceInfo;
-import com.mobiperf.DeviceProperty;
-import com.mobiperf.Logger;
-import com.mobiperf.R;
+import com.example.speedtest.DeviceInfo;
+import com.example.speedtest.DeviceProperty;
+import com.example.speedtest.Logger;
+import com.example.speedtest.R;
 
 
 import android.content.BroadcastReceiver;

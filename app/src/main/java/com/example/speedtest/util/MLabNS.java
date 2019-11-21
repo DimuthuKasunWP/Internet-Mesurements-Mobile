@@ -1,6 +1,6 @@
-package com.mobiperf.util;
+package com.example.speedtest.util;
 
-import com.mobiperf.Logger;
+import com.example.speedtest.Logger;
 
 import android.content.Context;
 
