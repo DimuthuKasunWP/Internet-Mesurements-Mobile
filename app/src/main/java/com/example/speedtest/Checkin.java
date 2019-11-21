@@ -11,7 +11,7 @@
  * or implied. See the License for the specific language governing permissions and limitations under
  * the License.
  */
-package com.mobiperf;
+package com.example.speedtest;
 
 import com.mobiperf.measurements.RRCTask;
 import com.mobiperf.util.MeasurementJsonConvertor;

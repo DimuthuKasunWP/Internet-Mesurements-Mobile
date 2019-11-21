@@ -13,7 +13,7 @@
  * limitations under the License.
  */
 
-package com.mobiperf;
+package com.example.speedtest;
 
 
 /**
