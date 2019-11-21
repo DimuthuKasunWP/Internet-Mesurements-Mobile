@@ -57,8 +57,8 @@ import com.example.speedtest.MeasurementError;
 import com.example.speedtest.MeasurementResult;
 import com.example.speedtest.MeasurementTask;
 import com.example.speedtest.RRCTrafficControl;
-import com.mobiperf.util.MeasurementJsonConvertor;
-import com.mobiperf.util.PhoneUtils;
+import com.example.speedtest.util.MeasurementJsonConvertor;
+import com.example.speedtest.util.PhoneUtils;
 
 
 /**

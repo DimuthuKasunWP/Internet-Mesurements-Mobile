@@ -21,9 +21,9 @@ import com.example.speedtest.MeasurementDesc;
 import com.example.speedtest.MeasurementError;
 import com.example.speedtest.MeasurementResult;
 import com.example.speedtest.MeasurementTask;
-import com.mobiperf.util.MeasurementJsonConvertor;
-import com.mobiperf.util.PhoneUtils;
-import com.mobiperf.util.Util;
+import com.example.speedtest.util.MeasurementJsonConvertor;
+import com.example.speedtest.util.PhoneUtils;
+import com.example.speedtest.util.Util;
 
 import android.content.Context;
 import android.net.http.AndroidHttpClient;

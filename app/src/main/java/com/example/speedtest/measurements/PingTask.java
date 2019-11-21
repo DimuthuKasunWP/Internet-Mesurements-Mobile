@@ -41,9 +41,9 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.Map;
 
-import com.mobiperf.util.MeasurementJsonConvertor;
-import com.mobiperf.util.PhoneUtils;
-import com.mobiperf.util.Util;
+import com.example.speedtest.util.MeasurementJsonConvertor;
+import com.example.speedtest.util.PhoneUtils;
+import com.example.speedtest.util.Util;
 import com.example.speedtest.Config;
 import com.example.speedtest.Logger;
 import com.example.speedtest.MeasurementDesc;
