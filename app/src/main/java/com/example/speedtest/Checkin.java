@@ -13,9 +13,9 @@
  */
 package com.example.speedtest;
 
-import com.mobiperf.measurements.RRCTask;
-import com.mobiperf.util.MeasurementJsonConvertor;
-import com.mobiperf.util.PhoneUtils;
+import com.example.speedtest.measurements.RRCTask;
+import com.example.speedtest.util.MeasurementJsonConvertor;
+import com.example.speedtest.util.PhoneUtils;
 
 import android.accounts.AuthenticatorException;
 import android.accounts.OperationCanceledException;

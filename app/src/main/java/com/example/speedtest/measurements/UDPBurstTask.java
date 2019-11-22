@@ -20,8 +20,8 @@ import com.example.speedtest.MeasurementDesc;
 import com.example.speedtest.MeasurementError;
 import com.example.speedtest.MeasurementResult;
 import com.example.speedtest.MeasurementTask;
-import com.mobiperf.util.MLabNS;
-import com.mobiperf.util.PhoneUtils;
+import com.example.speedtest.util.MLabNS;
+import com.example.speedtest.util.PhoneUtils;
 
 import android.content.Context;
 
