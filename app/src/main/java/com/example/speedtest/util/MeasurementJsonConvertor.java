@@ -25,10 +25,10 @@ import com.google.myjson.JsonParseException;
 import com.google.myjson.JsonPrimitive;
 import com.google.myjson.JsonSerializationContext;
 import com.google.myjson.JsonSerializer;
-import com.mobiperf.Logger;
-import com.mobiperf.MeasurementDesc;
-import com.mobiperf.MeasurementTask;
-import com.mobiperf.SpeedometerApp;
+import com.example.speedtest.Logger;
+import com.example.speedtest.MeasurementDesc;
+import com.example.speedtest.MeasurementTask;
+import com.example.speedtest.SpeedometerApp;
 
 import android.content.Context;
 import android.util.Log;
