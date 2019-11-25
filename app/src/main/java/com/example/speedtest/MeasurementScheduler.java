@@ -65,10 +65,10 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import com.google.myjson.reflect.TypeToken;
-import com.mobiperf.ResourceCapManager.DataUsageProfile;
-import com.mobiperf.ResourceCapManager.PowerAwareTask;
-import com.mobiperf.util.MeasurementJsonConvertor;
-import com.mobiperf.util.PhoneUtils;
+import com.example.speedtest.ResourceCapManager.DataUsageProfile;
+import com.example.speedtest.ResourceCapManager.PowerAwareTask;
+import com.example.speedtest.util.MeasurementJsonConvertor;
+import com.example.speedtest.util.PhoneUtils;
 import com.example.speedtest.R;
 
 /**
