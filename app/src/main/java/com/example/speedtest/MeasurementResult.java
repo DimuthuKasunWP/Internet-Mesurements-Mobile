@@ -16,21 +16,21 @@ package com.example.speedtest;
 
 import android.util.StringBuilderPrinter;
 
-import com.mobiperf.measurements.DnsLookupTask;
-import com.mobiperf.measurements.DnsLookupTask.DnsLookupDesc;
-import com.mobiperf.measurements.HttpTask;
-import com.mobiperf.measurements.HttpTask.HttpDesc;
-import com.mobiperf.measurements.PingTask;
-import com.mobiperf.measurements.PingTask.PingDesc;
-import com.mobiperf.measurements.TracerouteTask;
-import com.mobiperf.measurements.TracerouteTask.TracerouteDesc;
-import com.mobiperf.measurements.UDPBurstTask;
-import com.mobiperf.measurements.UDPBurstTask.UDPBurstDesc;
-import com.mobiperf.measurements.TCPThroughputTask;
-import com.mobiperf.measurements.TCPThroughputTask.TCPThroughputDesc;
-import com.mobiperf.util.MeasurementJsonConvertor;
-import com.mobiperf.util.PhoneUtils;
-import com.mobiperf.util.Util;
+import com.example.speedtest.measurements.DnsLookupTask;
+import com.example.speedtest.measurements.DnsLookupTask.DnsLookupDesc;
+import com.example.speedtest.measurements.HttpTask;
+import com.example.speedtest.measurements.HttpTask.HttpDesc;
+import com.example.speedtest.measurements.PingTask;
+import com.example.speedtest.measurements.PingTask.PingDesc;
+import com.example.speedtest.measurements.TracerouteTask;
+import com.example.speedtest.measurements.TracerouteTask.TracerouteDesc;
+import com.example.speedtest.measurements.UDPBurstTask;
+import com.example.speedtest.measurements.UDPBurstTask.UDPBurstDesc;
+import com.example.speedtest.measurements.TCPThroughputTask;
+import com.example.speedtest.measurements.TCPThroughputTask.TCPThroughputDesc;
+import com.example.speedtest.util.MeasurementJsonConvertor;
+import com.example.speedtest.util.PhoneUtils;
+import com.example.speedtest.util.Util;
 
 import java.util.Formatter;
 import java.util.HashMap;
