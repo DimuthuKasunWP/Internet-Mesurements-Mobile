@@ -612,16 +612,24 @@ public class MeasurementScheduler extends Service {
     PendingIntent pendIntent =
         PendingIntent.getActivity(this, 0, intent,
             PendingIntent.FLAG_CANCEL_CURRENT);
-
+    Context context=getApplicationContext();
+    NotificationManager notificationManager = (NotificationManager)context.getSystemService(Context.NOTIFICATION_SERVICE);
+    NotificationCompat.Builder nBuilder = new NotificationCompat.Builder(context);
+    Notification notification= nBuilder
+                               .setContentIntent(pendIntent)
+                               .setSmallIcon(R.drawable.icon_statusbar)
+                               .setWhen(System.currentTimeMillis())
+                               .setContentTitle("Speedometer")
+                               .setContentText(notificationMsg).build();
     // This constructor is deprecated in 3.x. But most phones still run 2.x systems
-    Notification notice =
-        new Notification(R.drawable.icon_statusbar, notificationMsg,
-            System.currentTimeMillis());
+//    Notification notice =
+//        new Notification(R.drawable.icon_statusbar, notificationMsg,
+//            System.currentTimeMillis());
 
     // This is deprecated in 3.x. But most phones still run 2.x systems
-    notice.setLatestEventInfo(this, "Speedometer", notificationMsg, pendIntent);
+//    notice.setLatestEventInfo(this, "Speedometer", notificationMsg, pendIntent);
 
-    notificationManager.notify(NOTIFICATION_ID, notice);
+    notificationManager.notify(NOTIFICATION_ID, notification);
   }
 
   /**
