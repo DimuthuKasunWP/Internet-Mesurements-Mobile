@@ -365,7 +365,7 @@ public class PhoneUtils {
     String tempResult = "";
     if (infos.size() > 0) {
       for (CellInfo info : infos) {
-        if (checkSelfPermission(Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && checkSelfPermission(Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+        if (ContextCompat.checkSelfPermission(this.context, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ContextCompat.checkSelfPermission(this.context, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
           // TODO: Consider calling
           //    Activity#requestPermissions
           // here to request the missing permissions, and then overriding
@@ -373,11 +373,12 @@ public class PhoneUtils {
           //                                          int[] grantResults)
           // to handle the case where the user grants the permission. See the documentation
           // for Activity#requestPermissions for more details.
-          return TODO;
+//          return;
+//          return;
         }
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.P) {
           tempResult = cidOnly ? ((GsmCellLocation) telephonyManager.getCellLocation()).getCid() + ";" : ((GsmCellLocation) telephonyManager.getCellLocation()).getLac() + ","
-                  +((GsmCellLocation) telephonyManager.getCellLocation()).getCid() + "," + telephonyManager.getSignalStrength() + ";";
+                  + ((GsmCellLocation) telephonyManager.getCellLocation()).getCid() + "," + telephonyManager.getSignalStrength() + ";";
         }
         buf.append(tempResult);
       }
@@ -429,7 +430,7 @@ public class PhoneUtils {
        * device powercycle may not update it.
        * {@see android.location.LocationManager.getLastKnownLocation}.
        */
-      if (ContextCompat.checkSelfPermission(Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && checkSelfPermission(Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+      if (ContextCompat.checkSelfPermission(this.context, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ContextCompat.checkSelfPermission(this.context, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
         // TODO: Consider calling
         //    Activity#requestPermissions
         // here to request the missing permissions, and then overriding
@@ -459,6 +460,16 @@ public class PhoneUtils {
   public Location getLocation() {
     try {
       initLocation();
+      if (ContextCompat.checkSelfPermission(this.context,Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ContextCompat.checkSelfPermission(this.context,Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+        // TODO: Consider calling
+        //    Activity#requestPermissions
+        // here to request the missing permissions, and then overriding
+        //   public void onRequestPermissionsResult(int requestCode, String[] permissions,
+        //                                          int[] grantResults)
+        // to handle the case where the user grants the permission. See the documentation
+        // for Activity#requestPermissions for more details.
+//        return TODO;
+      }
       Location location = locationManager.getLastKnownLocation(locationProviderName);
       if (location == null) {
         Logger.e("Cannot obtain location from provider " + locationProviderName);
@@ -475,7 +486,7 @@ public class PhoneUtils {
   public synchronized void acquireWakeLock() {
     if (wakeLock == null) {
       PowerManager pm = (PowerManager) context.getSystemService(Context.POWER_SERVICE);
-      wakeLock = pm.newWakeLock(PowerManager.PARTIAL_WAKE_LOCK, "tag");
+      wakeLock = pm.newWakeLock(PowerManager.PARTIAL_WAKE_LOCK, "CPU:WakeUp");
     }
     Logger.d("PowerLock acquired");
     wakeLock.acquire();
