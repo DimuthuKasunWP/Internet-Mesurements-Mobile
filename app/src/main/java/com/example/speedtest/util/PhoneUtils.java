@@ -460,7 +460,7 @@ public class PhoneUtils {
   public Location getLocation() {
     try {
       initLocation();
-      if (ContextCompat.checkSelfPermission(this.context,Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ContextCompat.checkSelfPermission(this.context,Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+      if (ContextCompat.checkSelfPermission(this.context, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ContextCompat.checkSelfPermission(this.context, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
         // TODO: Consider calling
         //    Activity#requestPermissions
         // here to request the missing permissions, and then overriding
@@ -504,13 +504,13 @@ public class PhoneUtils {
       }
     }
   }
-  
+
   /** Release all resource upon app shutdown */
   public synchronized void shutDown() {
     if (this.wakeLock != null) {
       /* Wakelock are ref counted by default. We disable this feature here to ensure that
        * the power lock is released upon shutdown.
-       */ 
+       */
       wakeLock.setReferenceCounted(false);
       wakeLock.release();
     }
@@ -538,7 +538,7 @@ public class PhoneUtils {
   public static Bitmap captureScreenshot(WebView webView) {
     Picture picture = webView.capturePicture();
     int width = Math.min(picture.getWidth(),
-        webView.getWidth() - webView.getVerticalScrollbarWidth());
+            webView.getWidth() - webView.getVerticalScrollbarWidth());
     int height = Math.min(picture.getHeight(), webView.getHeight());
     Bitmap bitmap = Bitmap.createBitmap(width, height, Config.RGB_565);
     Canvas cv = new Canvas(bitmap);
@@ -573,7 +573,7 @@ public class PhoneUtils {
   }
 
   /**
-   * Types of interfaces to return from {@link #getUpInterfaces(InterfaceType)}.
+   * Types of interfaces to return from {@link InterfaceType}.
    */
   public enum InterfaceType {
     /** Local and external interfaces. */
@@ -604,7 +604,7 @@ public class PhoneUtils {
   public static String debugString(String[] arr) {
     return debugString(Arrays.asList(arr));
   }
-  
+
   public String getAppVersionName() {
     try {
       String packageName = context.getPackageName();
@@ -621,21 +621,21 @@ public class PhoneUtils {
   public synchronized int getCurrentBatteryLevel() {
     return curBatteryLevel;
   }
-  
+
   /**
    * Returns if the batter is charing
    */
   public synchronized boolean isCharging() {
     return isCharging;
   }
-  
+
   /**
    * Sets the current RSSI value
    */
   public synchronized void setCurrentRssi(int rssi) {
     currentSignalStrength = rssi;
   }
-  
+
   /**
    * Returns the last updated RSSI value
    */
@@ -643,24 +643,24 @@ public class PhoneUtils {
     initNetwork();
     return currentSignalStrength;
   }
-  
+
   private synchronized void updateBatteryStat(Intent powerIntent) {
-    int scale = powerIntent.getIntExtra(BatteryManager.EXTRA_SCALE, 
-        com.mobiperf.Config.DEFAULT_BATTERY_SCALE);
-    int level = powerIntent.getIntExtra(BatteryManager.EXTRA_LEVEL, 
-        com.mobiperf.Config.DEFAULT_BATTERY_LEVEL);
+    int scale = powerIntent.getIntExtra(BatteryManager.EXTRA_SCALE,
+            com.example.speedtest.Config.DEFAULT_BATTERY_SCALE);
+    int level = powerIntent.getIntExtra(BatteryManager.EXTRA_LEVEL,
+            com.example.speedtest.Config.DEFAULT_BATTERY_LEVEL);
     // change to the unit of percentage
     this.curBatteryLevel = level * 100 / scale;
-    this.isCharging = powerIntent.getIntExtra(BatteryManager.EXTRA_STATUS, 
-        BatteryManager.BATTERY_STATUS_UNKNOWN) == BatteryManager.BATTERY_STATUS_CHARGING;
-    
+    this.isCharging = powerIntent.getIntExtra(BatteryManager.EXTRA_STATUS,
+            BatteryManager.BATTERY_STATUS_UNKNOWN) == BatteryManager.BATTERY_STATUS_CHARGING;
+
     Logger.i(
-        "Current power level is " + curBatteryLevel + " and isCharging = " + isCharging);
+            "Current power level is " + curBatteryLevel + " and isCharging = " + isCharging);
   }
-  
+
   private class PowerStateChangeReceiver extends BroadcastReceiver {
-    /** 
-     * @see android.content.BroadcastReceiver#onReceive(android.content.Context, 
+    /**
+     * @see android.content.BroadcastReceiver#onReceive(android.content.Context,
      * android.content.Intent)
      */
     @Override
@@ -668,7 +668,7 @@ public class PhoneUtils {
       updateBatteryStat(intent);
     }
   }
-  
+
   private class SignalStrengthChangeListener extends PhoneStateListener {
     @Override
     public void onSignalStrengthsChanged(SignalStrength signalStrength) {
@@ -676,15 +676,15 @@ public class PhoneUtils {
       if (network.equals(NETWORK_TYPES[TelephonyManager.NETWORK_TYPE_CDMA])) {
         setCurrentRssi(signalStrength.getCdmaDbm());
       } else if (network.equals(NETWORK_TYPES[TelephonyManager.NETWORK_TYPE_EVDO_0]) ||
-          network.equals(NETWORK_TYPES[TelephonyManager.NETWORK_TYPE_EVDO_A]) ||
-            network.equals(NETWORK_TYPES[TelephonyManager.NETWORK_TYPE_EVDO_B])) {
+              network.equals(NETWORK_TYPES[TelephonyManager.NETWORK_TYPE_EVDO_A]) ||
+              network.equals(NETWORK_TYPES[TelephonyManager.NETWORK_TYPE_EVDO_B])) {
         setCurrentRssi(signalStrength.getEvdoDbm());
       } else if (signalStrength.isGsm()) {
         setCurrentRssi(signalStrength.getGsmSignalStrength());
       }
     }
   }
-  
+
   /**
    * Fetches the new connectivity state from the connectivity manager directly.
    */
@@ -703,7 +703,7 @@ public class PhoneUtils {
       PhoneUtils.this.currentNetworkConnection = TYPE_NOT_CONNECTED;
     }
   }
-  
+
   /**
    * When alerted that the network connectivity has changed, change the 
    * stored connectivity value.
@@ -720,13 +720,23 @@ public class PhoneUtils {
   public synchronized int getCurrentNetworkConnection() {
     return currentNetworkConnection;
   }
-  
+
   private String getVersionStr() {
     return String.format("INCREMENTAL:%s, RELEASE:%s, SDK_INT:%s", Build.VERSION.INCREMENTAL,
-        Build.VERSION.RELEASE, Build.VERSION.SDK_INT);
+            Build.VERSION.RELEASE, Build.VERSION.SDK_INT);
   }
-  
+
   private String getDeviceId() {
+    if (ContextCompat.checkSelfPermission(this.context,Manifest.permission.READ_PHONE_STATE) != PackageManager.PERMISSION_GRANTED) {
+      // TODO: Consider calling
+      //    Activity#requestPermissions
+      // here to request the missing permissions, and then overriding
+      //   public void onRequestPermissionsResult(int requestCode, String[] permissions,
+      //                                          int[] grantResults)
+      // to handle the case where the user grants the permission. See the documentation
+      // for Activity#requestPermissions for more details.
+      return TODO;
+    }
     String deviceId = telephonyManager.getDeviceId();  // This ID is permanent to a physical phone.
     // "generic" means the emulator.
     if (deviceId == null || Build.DEVICE.equals("generic")) {
@@ -893,6 +903,7 @@ public class PhoneUtils {
   }
   
   /** Returns the DeviceProperty needed to report the measurement result */
+  @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN_MR1)
   public DeviceProperty getDeviceProperty() {
     String carrierName = telephonyManager.getNetworkOperatorName();
     Location location;
@@ -913,12 +924,14 @@ public class PhoneUtils {
     }
     String versionName = PhoneUtils.getPhoneUtils().getAppVersionName();
     PhoneUtils utils = PhoneUtils.getPhoneUtils();
-    
-    return new DeviceProperty(getDeviceInfo().deviceId, versionName,
-        System.currentTimeMillis() * 1000, getVersionStr(), ipConnectivity,
-        dnResolvability, location.getLongitude(), location.getLatitude(), 
-        location.getProvider(), networkType, carrierName, 
-        utils.getCurrentBatteryLevel(), utils.isCharging(), 
-        utils.getCellInfo(false), utils.getCurrentRssi());
+
+    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN_MR1) {
+      return new DeviceProperty(getDeviceInfo().deviceId, versionName,
+          System.currentTimeMillis() * 1000, getVersionStr(), ipConnectivity,
+          dnResolvability, location.getLongitude(), location.getLatitude(),
+          location.getProvider(), networkType, carrierName,
+          utils.getCurrentBatteryLevel(), utils.isCharging(),
+          utils.getCellInfo(false), utils.getCurrentRssi());
+    }
   }  
 }
