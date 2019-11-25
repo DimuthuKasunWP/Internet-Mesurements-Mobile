@@ -28,6 +28,8 @@ import android.os.Binder;
 import android.os.IBinder;
 import android.preference.PreferenceManager;
 
+import androidx.core.app.NotificationCompat;
+
 import java.io.BufferedOutputStream;
 import java.io.BufferedReader;
 import java.io.FileInputStream;
@@ -257,8 +259,9 @@ public class MeasurementScheduler extends Service {
     PendingIntent pendIntent =
         PendingIntent.getActivity(this, 0, intent,
             PendingIntent.FLAG_CANCEL_CURRENT);
-
-    NotificationManager notificationManager = (NotificationManager)getApplicationContext().getSystemService(Context.NOTIFICATION_SERVICE);
+    Context context=getApplicationContext();
+    NotificationManager notificationManager = (NotificationManager)context.getSystemService(Context.NOTIFICATION_SERVICE);
+    NotificationCompat.Builder nBuilder = new NotificationCompat.Builder(context);
 
     // This constructor is deprecated in 3.x. But most phones still run 2.x systems
     Notification notice =
