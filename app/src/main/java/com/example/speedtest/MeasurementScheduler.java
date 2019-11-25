@@ -263,18 +263,25 @@ public class MeasurementScheduler extends Service {
     NotificationManager notificationManager = (NotificationManager)context.getSystemService(Context.NOTIFICATION_SERVICE);
     NotificationCompat.Builder nBuilder = new NotificationCompat.Builder(context);
 
-    // This constructor is deprecated in 3.x. But most phones still run 2.x systems
-    Notification notice =
-        new Notification(R.drawable.icon_statusbar,
-            getString(R.string.notificationSchedulerStarted),
-            System.currentTimeMillis());
-    notice.flags |=
-        Notification.FLAG_NO_CLEAR | Notification.FLAG_ONGOING_EVENT;
 
+    Notification notification=nBuilder
+                              .setContentIntent(pendIntent)
+                              .setSmallIcon(R.drawable.icon_statusbar)
+                              .setWhen(System.currentTimeMillis())
+                              .setContentTitle("Mobiperf")
+                              .setContentText("Mobiperf service is running").build();
+    // This constructor is deprecated in 3.x. But most phones still run 2.x systems
+//    Notification notice =
+//        new Notification(R.drawable.icon_statusbar,
+//            getString(R.string.notificationSchedulerStarted),
+//            System.currentTimeMillis());
+    notification.flags |=
+        Notification.FLAG_NO_CLEAR | Notification.FLAG_ONGOING_EVENT;
+    notificationManager.notify(1,notification);
     // This is deprecated in 3.x. But most phones still run 2.x systems
-    notice.setLatestEventInfo(this, getString(R.string.app_name),
-        getString(R.string.notificationServiceRunning), pendIntent);
-    return notice;
+//    notice.setLatestEventInfo(this, getString(R.string.app_name),
+//        getString(R.string.notificationServiceRunning), pendIntent);
+    return notification;
   }
 
   /**
