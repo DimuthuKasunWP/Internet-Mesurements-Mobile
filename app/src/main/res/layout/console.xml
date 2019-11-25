@@ -14,7 +14,7 @@
   <ListView
     android:layout_width="match_parent" 
     android:layout_height="wrap_content"
-    android:id="@+viewId/systemConsole"
+    android:id="@+id/viewId_systemConsole"
     android:textColor="#000000"
     android:scrollbars="vertical"/>
 </LinearLayout>

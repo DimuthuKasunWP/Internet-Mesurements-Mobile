@@ -17,13 +17,13 @@ package com.example.speedtest;
 import android.content.Context;
 import android.content.Intent;
 
-import com.mobiperf.measurements.DnsLookupTask;
-import com.mobiperf.measurements.HttpTask;
-import com.mobiperf.measurements.PingTask;
-import com.mobiperf.measurements.TracerouteTask;
-import com.mobiperf.measurements.UDPBurstTask;
-import com.mobiperf.measurements.TCPThroughputTask;
-import com.mobiperf.measurements.RRCTask;
+import com.example.speedtest.measurements.DnsLookupTask;
+import com.example.speedtest.measurements.HttpTask;
+import com.example.speedtest.measurements.PingTask;
+import com.example.speedtest.measurements.TracerouteTask;
+import com.example.speedtest.measurements.UDPBurstTask;
+import com.example.speedtest.measurements.TCPThroughputTask;
+import com.example.speedtest.measurements.RRCTask;
 
 import java.io.InvalidClassException;
 import java.util.HashMap;

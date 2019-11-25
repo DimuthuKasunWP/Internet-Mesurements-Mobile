@@ -58,6 +58,7 @@
     <string name="defaultUser">Anonymous</string>
     <string name="TCPThroughputDirLabel">Direction:</string>
     <string name="TCPThroughputTargetHint">m-lab</string>
+    <string name="title_activity_maps">testing map</string>
     
     
 </resources>

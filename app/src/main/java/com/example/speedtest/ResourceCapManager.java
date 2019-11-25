@@ -15,15 +15,15 @@
 
 package com.example.speedtest;
 
-import com.mobiperf.measurements.DnsLookupTask;
-import com.mobiperf.measurements.HttpTask;
-import com.mobiperf.measurements.PingTask;
-import com.mobiperf.measurements.RRCTask;
-import com.mobiperf.measurements.TCPThroughputTask;
-import com.mobiperf.measurements.TracerouteTask;
-import com.mobiperf.measurements.UDPBurstTask;
-import com.mobiperf.util.MeasurementJsonConvertor;
-import com.mobiperf.util.PhoneUtils;
+import com.example.speedtest.measurements.DnsLookupTask;
+import com.example.speedtest.measurements.HttpTask;
+import com.example.speedtest.measurements.PingTask;
+import com.example.speedtest.measurements.RRCTask;
+import com.example.speedtest.measurements.TCPThroughputTask;
+import com.example.speedtest.measurements.TracerouteTask;
+import com.example.speedtest.measurements.UDPBurstTask;
+import com.example.speedtest.util.MeasurementJsonConvertor;
+import com.example.speedtest.util.PhoneUtils;
 
 import android.content.Context;
 import android.content.Intent;
