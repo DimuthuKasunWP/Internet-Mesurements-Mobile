@@ -57,7 +57,7 @@ public class SystemConsoleActivity extends Activity {
   protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
     setContentView(R.layout.console);
-    this.consoleView = (ListView) this.findViewById(R.viewId.systemConsole);
+    this.consoleView = (ListView) this.findViewById(R.id.systemConsole);
     bindToService();
   }
   
