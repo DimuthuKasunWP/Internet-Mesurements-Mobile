@@ -20,10 +20,12 @@ import com.example.speedtest.Logger;
 import com.example.speedtest.R;
 
 
+import android.Manifest;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
+import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.graphics.Bitmap.Config;
 import android.graphics.Canvas;
@@ -80,7 +82,7 @@ public class PhoneUtils {
   public static final String IP_TYPE_IPV4_ONLY = "IPv4 only";
   public static final String IP_TYPE_IPV6_ONLY = "IPv6 only";
   public static final String IP_TYPE_IPV4_IPV6_BOTH = "IPv4 and IPv6";
-  
+
   /**
    * The app that uses this class. The app must remain alive for longer than
    * PhoneUtils objects are in use.
@@ -109,30 +111,30 @@ public class PhoneUtils {
 
   /** Call initNetworkManager() before using this var. */
   private TelephonyManager telephonyManager = null;
-  
+
   /** Tells whether the phone is charging */
   private boolean isCharging;
-  /** Current battery level in percentage */ 
+  /** Current battery level in percentage */
   private int curBatteryLevel;
   /** Receiver that handles battery change broadcast intents */
   private BroadcastReceiver powerBroadcastReceiver;
   private BroadcastReceiver networkBroadcastReceiver;
-  
+
   private int currentSignalStrength = NeighboringCellInfo.UNKNOWN_RSSI;
-  
+
   /** For monitoring the current network connection type**/
   public static int TYPE_WIFI = 1;
   public static int TYPE_MOBILE = 2;
   public static int TYPE_NOT_CONNECTED = 0;
-  private int currentNetworkConnection= TYPE_NOT_CONNECTED; 
-  
+  private int currentNetworkConnection = TYPE_NOT_CONNECTED;
+
   private DeviceInfo deviceInfo = null;
   /** IP compatibility status */
   // Indeterministic type due to client side timer expired
   private int IP_TYPE_CANNOT_DECIDE = 2;
   // Cannot resolve the hostname or cannot reach the destination address
   private int IP_TYPE_UNCONNECTIVITY = 1;
-  private int IP_TYPE_CONNECTIVITY = 0; 
+  private int IP_TYPE_CONNECTIVITY = 0;
   /** Domain name resolution status */
   private int DN_UNKNOWN = 2;
   private int DN_UNRESOLVABLE = 1;
@@ -140,19 +142,19 @@ public class PhoneUtils {
   //server configuration port on M-Lab servers 
   private int portNum = 6003;
   private int tcpTimeout = 3000;
-  
+
   protected PhoneUtils(Context context) {
     this.context = context;
     powerBroadcastReceiver = new PowerStateChangeReceiver();
     // Registers a receiver for battery change events.
-    Intent powerIntent = globalContext.registerReceiver(powerBroadcastReceiver, 
-        new IntentFilter(Intent.ACTION_BATTERY_CHANGED));
+    Intent powerIntent = globalContext.registerReceiver(powerBroadcastReceiver,
+            new IntentFilter(Intent.ACTION_BATTERY_CHANGED));
     updateBatteryStat(powerIntent);
-    
+
     networkBroadcastReceiver = new ConnectivityChangeReceiver();
     // Registers a receiver for network change events.
-    globalContext.registerReceiver(networkBroadcastReceiver, 
-        new IntentFilter("android.net.conn.CONNECTIVITY_CHANGE"));
+    globalContext.registerReceiver(networkBroadcastReceiver,
+            new IntentFilter("android.net.conn.CONNECTIVITY_CHANGE"));
     updateConnectivityInfo(); // does not require the intent to determine connectivity
   }
 
@@ -219,13 +221,13 @@ public class PhoneUtils {
     String device = Build.DEVICE.equals("generic") ? "emulator" : Build.DEVICE;
     String network = getNetwork();
     String carrier = (network == NETWORK_WIFI) ?
-        getWifiCarrierName() : getTelephonyCarrierName();
+            getWifiCarrierName() : getTelephonyCarrierName();
 
     StringBuilder stringBuilder = new StringBuilder(ANDROID_STRING);
     stringBuilder.append('-').append(device).append('_')
-        .append(Build.VERSION.RELEASE).append('_').append(network)
-        .append('_').append(carrier).append('_').append(getTelephonyPhoneType())
-        .append('_').append(isLandscape() ? "Landscape" : "Portrait");
+            .append(Build.VERSION.RELEASE).append('_').append(network)
+            .append('_').append(carrier).append('_').append(getTelephonyPhoneType())
+            .append('_').append(isLandscape() ? "Landscape" : "Portrait");
 
     return stringBuilder.toString();
   }
@@ -238,45 +240,45 @@ public class PhoneUtils {
   private synchronized void initNetwork() {
     if (connectivityManager == null) {
       ConnectivityManager tryConnectivityManager =
-          (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
+              (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
 
       TelephonyManager tryTelephonyManager =
-          (TelephonyManager) context.getSystemService(Context.TELEPHONY_SERVICE);
+              (TelephonyManager) context.getSystemService(Context.TELEPHONY_SERVICE);
 
       // Assign to member vars only after all the get calls succeeded,
       // so that either all get assigned, or none get assigned.
       connectivityManager = tryConnectivityManager;
       telephonyManager = tryTelephonyManager;
-      
+
       // Some interesting info to look at in the logs
       NetworkInfo[] infos = connectivityManager.getAllNetworkInfo();
       for (NetworkInfo networkInfo : infos) {
         Logger.i("Network: " + networkInfo);
       }
       Logger.i("Phone type: " + getTelephonyPhoneType() +
-            ", Carrier: " + getTelephonyCarrierName());
+              ", Carrier: " + getTelephonyCarrierName());
     }
     assert connectivityManager != null;
     assert telephonyManager != null;
   }
-  
+
   /**
    * This method must be called in the service thread, as the system will create a Looper in
    * the calling thread which will handle the callbacks.
    */
   public void registerSignalStrengthListener() {
     initNetwork();
-    telephonyManager.listen(new SignalStrengthChangeListener(), 
-        PhoneStateListener.LISTEN_SIGNAL_STRENGTHS);
-  }  
-  
+    telephonyManager.listen(new SignalStrengthChangeListener(),
+            PhoneStateListener.LISTEN_SIGNAL_STRENGTHS);
+  }
+
   /** Returns the network that the phone is on (e.g. Wifi, Edge, GPRS, etc). */
   public String getNetwork() {
     initNetwork();
     NetworkInfo networkInfo =
-      connectivityManager.getNetworkInfo(ConnectivityManager.TYPE_WIFI);
+            connectivityManager.getNetworkInfo(ConnectivityManager.TYPE_WIFI);
     if (networkInfo != null &&
-        networkInfo.getState() == NetworkInfo.State.CONNECTED) {
+            networkInfo.getState() == NetworkInfo.State.CONNECTED) {
       return NETWORK_WIFI;
     } else {
       return getTelephonyNetworkType();
@@ -284,21 +286,21 @@ public class PhoneUtils {
   }
 
   private static final String[] NETWORK_TYPES = {
-    "UNKNOWN",  // 0  - NETWORK_TYPE_UNKNOWN
-    "GPRS",     // 1  - NETWORK_TYPE_GPRS
-    "EDGE",     // 2  - NETWORK_TYPE_EDGE
-    "UMTS",     // 3  - NETWORK_TYPE_UMTS
-    "CDMA",     // 4  - NETWORK_TYPE_CDMA
-    "EVDO_0",   // 5  - NETWORK_TYPE_EVDO_0
-    "EVDO_A",   // 6  - NETWORK_TYPE_EVDO_A
-    "1xRTT",    // 7  - NETWORK_TYPE_1xRTT
-    "HSDPA",    // 8  - NETWORK_TYPE_HSDPA
-    "HSUPA",    // 9  - NETWORK_TYPE_HSUPA
-    "HSPA",     // 10 - NETWORK_TYPE_HSPA
-    "IDEN",     // 11 - NETWORK_TYPE_IDEN
-    "EVDO_B",   // 12 - NETWORK_TYPE_EVDO_B
-    "LTE",      // 13 - NETWORK_TYPE_LTE
-    "EHRPD",    // 14 - NETWORK_TYPE_EHRPD
+          "UNKNOWN",  // 0  - NETWORK_TYPE_UNKNOWN
+          "GPRS",     // 1  - NETWORK_TYPE_GPRS
+          "EDGE",     // 2  - NETWORK_TYPE_EDGE
+          "UMTS",     // 3  - NETWORK_TYPE_UMTS
+          "CDMA",     // 4  - NETWORK_TYPE_CDMA
+          "EVDO_0",   // 5  - NETWORK_TYPE_EVDO_0
+          "EVDO_A",   // 6  - NETWORK_TYPE_EVDO_A
+          "1xRTT",    // 7  - NETWORK_TYPE_1xRTT
+          "HSDPA",    // 8  - NETWORK_TYPE_HSDPA
+          "HSUPA",    // 9  - NETWORK_TYPE_HSUPA
+          "HSPA",     // 10 - NETWORK_TYPE_HSPA
+          "IDEN",     // 11 - NETWORK_TYPE_IDEN
+          "EVDO_B",   // 12 - NETWORK_TYPE_EVDO_B
+          "LTE",      // 13 - NETWORK_TYPE_LTE
+          "EHRPD",    // 14 - NETWORK_TYPE_EHRPD
   };
 
   /** Returns mobile data network connection type. */
@@ -335,18 +337,18 @@ public class PhoneUtils {
   /** Returns current Wi-Fi SSID, or null if Wi-Fi is not connected. */
   private String getWifiCarrierName() {
     WifiManager wifiManager =
-        (WifiManager) context.getSystemService(Context.WIFI_SERVICE);
+            (WifiManager) context.getSystemService(Context.WIFI_SERVICE);
     WifiInfo wifiInfo = wifiManager.getConnectionInfo();
     if (wifiInfo != null) {
       return wifiInfo.getSSID();
     }
     return null;
   }
-  
+
   /**
    * Returns the information about cell towers in range. Returns null if the information is 
    * not available 
-   * 
+   *
    * TODO(wenjiezeng): As folklore has it and Wenjie has confirmed, we cannot get cell info from
    * Samsung phones.
    */
@@ -357,8 +359,8 @@ public class PhoneUtils {
     String tempResult = "";
     if (infos.size() > 0) {
       for (NeighboringCellInfo info : infos) {
-        tempResult = cidOnly ? info.getCid() + ";" : info.getLac() + "," 
-                               + info.getCid() + "," + info.getRssi() + ";";
+        tempResult = cidOnly ? info.getCid() + ";" : info.getLac() + ","
+                + info.getCid() + "," + info.getRssi() + ";";
         buf.append(tempResult);
       }
       // Removes the trailing semicolon
@@ -377,7 +379,7 @@ public class PhoneUtils {
   private synchronized void initLocation() {
     if (locationManager == null) {
       LocationManager manager =
-        (LocationManager) context.getSystemService(Context.LOCATION_SERVICE);
+              (LocationManager) context.getSystemService(Context.LOCATION_SERVICE);
 
       Criteria criteriaCoarse = new Criteria();
       /* "Coarse" accuracy means "no need to use GPS".
@@ -389,8 +391,8 @@ public class PhoneUtils {
       criteriaCoarse.setAccuracy(Criteria.ACCURACY_COARSE);
       criteriaCoarse.setPowerRequirement(Criteria.POWER_LOW);
       String providerName =
-          manager.getBestProvider(criteriaCoarse, /*enabledOnly=*/true);
-      
+              manager.getBestProvider(criteriaCoarse, /*enabledOnly=*/true);
+
       List<String> providers = manager.getAllProviders();
       for (String providerNameIter : providers) {
         try {
@@ -401,7 +403,7 @@ public class PhoneUtils {
           continue;
         }
         Logger.i(providerNameIter + ": " +
-              (manager.isProviderEnabled(providerNameIter) ? "enabled" : "disabled"));
+                (manager.isProviderEnabled(providerNameIter) ? "enabled" : "disabled"));
       }
 
       /* Make sure the provider updates its location.
@@ -409,11 +411,21 @@ public class PhoneUtils {
        * device powercycle may not update it.
        * {@see android.location.LocationManager.getLastKnownLocation}.
        */
+      if (checkSelfPermission(Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && checkSelfPermission(Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+        // TODO: Consider calling
+        //    Activity#requestPermissions
+        // here to request the missing permissions, and then overriding
+        //   public void onRequestPermissionsResult(int requestCode, String[] permissions,
+        //                                          int[] grantResults)
+        // to handle the case where the user grants the permission. See the documentation
+        // for Activity#requestPermissions for more details.
+        return;
+      }
       manager.requestLocationUpdates(providerName,
-                                     /*minTime=*/0,
-                                     /*minDistance=*/0,
-                                     new LoggingLocationListener(),
-                                     Looper.getMainLooper());
+              /*minTime=*/0,
+              /*minDistance=*/0,
+              new LoggingLocationListener(),
+              Looper.getMainLooper());
       locationManager = manager;
       locationProviderName = providerName;
     }
