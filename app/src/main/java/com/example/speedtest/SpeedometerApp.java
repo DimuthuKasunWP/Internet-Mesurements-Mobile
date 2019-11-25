@@ -154,7 +154,7 @@ public class SpeedometerApp extends TabActivity {
         return true;
       }
       case R.id.aboutPage: {
-        Intent intent = new Intent(getBaseContext(), com.mobiperf.About.class);
+        Intent intent = new Intent(getBaseContext(), com.example.speedtest.About.class);
         startActivity(intent);
         return true;
       }
