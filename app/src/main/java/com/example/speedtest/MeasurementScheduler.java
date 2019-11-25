@@ -251,12 +251,14 @@ public class MeasurementScheduler extends Service {
   /**
    * Create notification that indicates the service is running.
    */
-  private Notification createServiceRunningNotification() {
+  private  Notification createServiceRunningNotification() {
     // The intent to launch when the user clicks the expanded notification
     Intent intent = new Intent(this, SpeedometerApp.class);
     PendingIntent pendIntent =
         PendingIntent.getActivity(this, 0, intent,
             PendingIntent.FLAG_CANCEL_CURRENT);
+
+    NotificationManager notificationManager = (NotificationManager)getApplicationContext().getSystemService(Context.NOTIFICATION_SERVICE);
 
     // This constructor is deprecated in 3.x. But most phones still run 2.x systems
     Notification notice =
