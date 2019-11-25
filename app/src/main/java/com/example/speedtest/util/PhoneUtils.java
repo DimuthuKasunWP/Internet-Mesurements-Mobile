@@ -46,13 +46,18 @@ import android.os.Looper;
 import android.os.PowerManager;
 import android.os.PowerManager.WakeLock;
 import android.provider.Settings.Secure;
+import android.telephony.CellInfo;
 import android.telephony.NeighboringCellInfo;
 import android.telephony.PhoneStateListener;
 import android.telephony.SignalStrength;
 import android.telephony.TelephonyManager;
+import android.telephony.gsm.GsmCellLocation;
 import android.view.Display;
 import android.view.WindowManager;
 import android.webkit.WebView;
+
+import androidx.annotation.RequiresApi;
+import androidx.core.content.ContextCompat;
 
 import java.io.IOException;
 import java.net.ConnectException;
@@ -352,15 +357,28 @@ public class PhoneUtils {
    * TODO(wenjiezeng): As folklore has it and Wenjie has confirmed, we cannot get cell info from
    * Samsung phones.
    */
+  @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN_MR1)
   public String getCellInfo(boolean cidOnly) {
     initNetwork();
-    List<NeighboringCellInfo> infos = telephonyManager.getNeighboringCellInfo();
+    List<CellInfo> infos = telephonyManager.getAllCellInfo();
     StringBuffer buf = new StringBuffer();
     String tempResult = "";
     if (infos.size() > 0) {
-      for (NeighboringCellInfo info : infos) {
-        tempResult = cidOnly ? info.getCid() + ";" : info.getLac() + ","
-                + info.getCid() + "," + info.getRssi() + ";";
+      for (CellInfo info : infos) {
+        if (checkSelfPermission(Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && checkSelfPermission(Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+          // TODO: Consider calling
+          //    Activity#requestPermissions
+          // here to request the missing permissions, and then overriding
+          //   public void onRequestPermissionsResult(int requestCode, String[] permissions,
+          //                                          int[] grantResults)
+          // to handle the case where the user grants the permission. See the documentation
+          // for Activity#requestPermissions for more details.
+          return TODO;
+        }
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.P) {
+          tempResult = cidOnly ? ((GsmCellLocation) telephonyManager.getCellLocation()).getCid() + ";" : ((GsmCellLocation) telephonyManager.getCellLocation()).getLac() + ","
+                  +((GsmCellLocation) telephonyManager.getCellLocation()).getCid() + "," + telephonyManager.getSignalStrength() + ";";
+        }
         buf.append(tempResult);
       }
       // Removes the trailing semicolon
@@ -411,7 +429,7 @@ public class PhoneUtils {
        * device powercycle may not update it.
        * {@see android.location.LocationManager.getLastKnownLocation}.
        */
-      if (checkSelfPermission(Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && checkSelfPermission(Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+      if (ContextCompat.checkSelfPermission(Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && checkSelfPermission(Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
         // TODO: Consider calling
         //    Activity#requestPermissions
         // here to request the missing permissions, and then overriding
