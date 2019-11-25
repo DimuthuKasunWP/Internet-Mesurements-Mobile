@@ -735,7 +735,7 @@ public class PhoneUtils {
       //                                          int[] grantResults)
       // to handle the case where the user grants the permission. See the documentation
       // for Activity#requestPermissions for more details.
-      return TODO;
+//      return TODO;
     }
     String deviceId = telephonyManager.getDeviceId();  // This ID is permanent to a physical phone.
     // "generic" means the emulator.
@@ -932,6 +932,13 @@ public class PhoneUtils {
           location.getProvider(), networkType, carrierName,
           utils.getCurrentBatteryLevel(), utils.isCharging(),
           utils.getCellInfo(false), utils.getCurrentRssi());
+    }else{
+      return new DeviceProperty(getDeviceInfo().deviceId, versionName,
+              System.currentTimeMillis() * 1000, getVersionStr(), ipConnectivity,
+              dnResolvability, location.getLongitude(), location.getLatitude(),
+              location.getProvider(), networkType, carrierName,
+              utils.getCurrentBatteryLevel(), utils.isCharging(),
+              utils.getCellInfo(false), utils.getCurrentRssi());
     }
   }  
 }
